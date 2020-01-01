@@ -32,7 +32,7 @@ class MathFunction {
             this->koef = vector<long double>({cnst});
         }
 
-        MathFunction(std::vector<long double> il) {
+        MathFunction(const std::vector<long double> &il) {
             this->koef = il;
             this->degree = il.size() - 1;
             if (il.size())
@@ -40,7 +40,7 @@ class MathFunction {
                     this->koef[i] = il[this->degree - i];
         } 
     
-        MathFunction(int deg, std::vector<long double> il) {
+        MathFunction(int deg, const std::vector<long double> &il) {
             this->koef = vector<long double>(deg + 1);
             this->degree = deg;
             if (il.size())
@@ -67,7 +67,7 @@ class MathFunction {
             return F;
         }
         
-        MathFunction operator + (MathFunction G) const {
+        MathFunction operator + (const MathFunction &G) const {
             MathFunction F = *this;
             if (F.degree >= G.degree) {
                 for (int i = 0; i <= G.degree; i++)
@@ -88,7 +88,7 @@ class MathFunction {
             return F;
         }
 
-        MathFunction operator * (MathFunction G) const {
+        MathFunction operator * (const MathFunction &G) const {
             MathFunction F(this->degree + G.degree, {});
             std::vector<MathFunction> v;
             for (int i = 0; i <= this->degree; i++) {
@@ -102,15 +102,15 @@ class MathFunction {
         }
         
         
-        MathFunction operator / (MathFunction G) const {
+        MathFunction operator / (const MathFunction &G) const {
             MathFunction F(this->degree - G.degree, {});
             /* division... */
             return F;
         }
-        friend std::ostream &operator << (std::ostream &out, MathFunction f);
+        friend std::ostream &operator << (std::ostream &out, const MathFunction &f);
 };
         
-std::ostream &operator << (std::ostream &out, MathFunction f) {
+std::ostream &operator << (std::ostream &out, const MathFunction &f) {
     std::vector<long double> koef = f.GetKoef();
     int deg = f.Deg();
     if (deg == 0) {
