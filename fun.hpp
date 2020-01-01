@@ -1,5 +1,8 @@
 #ifndef __FUN_HPP_INC
 #define __FUN_HPP_INC
+class NotConstantFunctionException : private std::exception
+    {};
+
 class MathFunction {
     private:
         int degree; //proplems with '-' degreeses
@@ -49,6 +52,13 @@ class MathFunction {
         } 
         ~MathFunction() {}
         
+        operator long double() const {
+             if (this->degree == 0)
+                 return this->koef[0];
+             else
+                 throw NotConstantFunctionException();
+        }
+    
         long double operator () (long double Xarg) const {
             long double r = 0.0;
             for (int i = 0; i <= this->degree; i++)
