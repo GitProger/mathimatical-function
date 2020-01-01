@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <exception>
 using namespace std;
 #include "fun.hpp"
 
